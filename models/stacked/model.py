@@ -135,10 +135,11 @@ class StackedBert(nn.Module):
         #output = self.decoder(output)
         #return F.log_softmax(output, dim=-1)
         
+        # why not time distributed here?
         logits = self.decoder(output) #.squeeze()
-        print(input_ids.size())
-        print(logits.size())
-        print(output.size())
+        #print("input ids:", input_ids.size())
+        #print("logits:", logits.size())
+        #print("output:", output.size())
         return logits, output
 
 class PositionalEncoding(nn.Module):
