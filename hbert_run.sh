@@ -10,7 +10,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --mem-per-cpu=6000m  
-#SBATCH --time=00-02:30:00
+#SBATCH --time=00-04:30:00
 #SBATCH --account=engin1
 #SBATCH --partition=gpu
 #SBATCH --output=/home/%u/%x-%j.log
@@ -19,7 +19,7 @@
 # The application(s) to execute along with its input arguments and options:
 
 echo "Running the Hierarchical Bert"
-python -m models.stacked --dataset Reuters --model bert-base-uncased --max-seq-length 256 --batch-size 16 --lr 2e-5 --epochs 30
+python -m models.hbert --dataset Reuters --model bert-base-uncased --max-seq-length 256 --batch-size 16 --lr 2e-5 --epochs 30
 
     
 
