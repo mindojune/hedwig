@@ -79,10 +79,15 @@ if __name__ == '__main__':
 
     train_examples = None
     num_train_optimization_steps = None
+
+    #print(args.gradient_accumulation_steps)
+    #print(args.batch_size)
+    #exit()
+
     if not args.trained_model:
         train_examples = processor.get_train_examples(args.data_dir)
         num_train_optimization_steps = int(
-            len(train_examples) / args.batch_size / args.gradient_accumulation_steps) * args.epochs
+            len(train_examples) / args.batch_size / (args.gradient_accumulation_steps)) * args.epochs
     
     # NOTE, temporary fix
     args.ntoken = args.num_labels

@@ -19,7 +19,11 @@
 # The application(s) to execute along with its input arguments and options:
 
 echo "Running the Hierarchical Bert"
-python -m models.stacked --dataset Reuters --model bert-base-uncased --max-seq-length 256 --batch-size 16 --lr 2e-5 --epochs 30
+#python -m models.stacked --dataset Reuters --model bert-base-uncased --max-seq-length 256 --batch-size 1 --lr 2e-5 --epochs 30 --gradient-accumulation-steps 1
+python -m models.stacked --dataset Reuters --model bert-base-uncased --max-seq-length 256 --batch-size 16 --lr 2e-5 --epochs 30 --gradient-accumulation-steps 16
+
+
+
 
     
 

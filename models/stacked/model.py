@@ -118,17 +118,28 @@ class StackedBert(nn.Module):
         generating mask
         """
         src = x
-        mask = self._generate_square_subsequent_mask(len(src)).to(device)
+        mask = self._generate_square_subsequent_mask(len(src)) #.to(device)
         self.src_mask = mask
         #
 
-        src = self.encoder(src) * math.sqrt(self.ninp)
+        #src = self.encoder(src) * math.sqrt(self.ninp)
+        
         src = self.pos_encoder(src)
-        output = self.transformer_encoder(src, self.src_mask)
+        
+        DOCLEVEL = True
+        if DOCLEVEL:
+            output = self.transformer_encoder(src, self.src_mask)[:,-1,:]
+        else:
+            output = self.transformer_encoder(src, self.src_mask)
+
         #output = self.decoder(output)
         #return F.log_softmax(output, dim=-1)
         
-        return self.decoder(output), output
+        logits = self.decoder(output) #.squeeze()
+        print(input_ids.size())
+        print(logits.size())
+        print(output.size())
+        return logits, output
 
 class PositionalEncoding(nn.Module):
     r"""Inject some information about the relative or absolute position of the tokens
