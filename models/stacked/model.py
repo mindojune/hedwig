@@ -128,8 +128,10 @@ class StackedBert(nn.Module):
         
         DOCLEVEL = True
         if DOCLEVEL:
+            # take the last sentence's representation as the representative
             output = self.transformer_encoder(src, self.src_mask)[:,-1,:]
         else:
+            # sentence level, all sentence vectors are taken
             output = self.transformer_encoder(src, self.src_mask)
 
         #output = self.decoder(output)
